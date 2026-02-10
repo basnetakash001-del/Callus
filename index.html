@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For My Callus ❤️</title>
+  <style>
+    :root { 
+      --bg1:#0b1020; --bg2:#140b2d; --card: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92); --accent:#ff4d88;
+    }
+    body { 
+      margin: 0; min-height: 100vh; color: var(--text);
+      font-family: sans-serif; overflow-x: hidden;
+      background: linear-gradient(160deg, var(--bg1), var(--bg2));
+    }
+    .heart { 
+      position: fixed; bottom: -40px; opacity: 0; 
+      pointer-events: none; animation: floatUp linear forwards;
+    }
+    @keyframes floatUp { 
+      0% { transform: translateY(0); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-110vh); opacity: 0; }
+    }
+    .card { 
+      max-width: 600px; margin: 50px auto; padding: 30px; 
+      background: var(--card); border-radius: 20px; text-align: center;
+      backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
+    }
+    button { 
+      padding: 12px 25px; font-size: 18px; border-radius: 10px; 
+      border: none; cursor: pointer; margin: 10px; 
+    }
+    #yes { background: var(--accent); color: white; }
+  </style>
+</head>
+<body>
+  <audio id="mySong" loop>
+    <source src="assets/song.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card">
+    <h1>Hi My Callus ❤️</h1>
+    <p>Will you be my girlfriend? 💍</p>
+    <div id="btns" style="position:relative; min-height:60px;">
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
+    <p style="margin-top:20px; opacity:0.7;">— Akash</p>
+  </div>
+
+<script>
+  const song = document.getElementById("mySong");
+
+  // Play music on first click (browser requirement)
+  document.body.addEventListener('click', () => { 
+    song.play().catch(e => console.log("Audio play failed until interaction"));
+  }, { once: true });
+
+  setInterval(() => { 
+    const h = document.createElement("div");
+    h.className = "heart"; h.textContent = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 7000);
+  }, 500);
+
+  const noBtn = document.getElementById("no");
+  noBtn.addEventListener("mouseover", () => { 
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * 80 + "%";
+    noBtn.style.top = Math.random() * 80 + "%";
+  });
+
+  document.getElementById("yes").addEventListener("click", () => { 
+    song.play();
+    alert("Yay! 🥹❤️");
+  });
+</script>
+</body>
+</html>
